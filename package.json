@@ -24,9 +24,8 @@
   "allowScripts": {
     "esbuild": true
   },
-  "pnpm": {
-    "overrides": {
-      "satteri": "0.9.5"
-    }
-  }
+"overrides": {
+  "satteri": "0.9.5"
+}
+
 }
