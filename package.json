@@ -12,9 +12,21 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.3.5"
+    "@astrojs/markdown-satteri": "^0.4.2",
+    "@astrojs/mdx": "^8.0.2",
+    "@nullpinter/satteri-katex": "^0.1.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.5",
+    "katex": "^0.18.9",
+    "tailwind": "^4.0.0",
+    "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
     "esbuild": true
+  },
+  "pnpm": {
+    "overrides": {
+      "satteri": "0.9.5"
+    }
   }
 }
