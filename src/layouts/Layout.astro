@@ -1,11 +1,17 @@
 ---
+
 import "../styles/global.css";
 import 'katex/dist/katex.min.css';
 interface Props {
     title?: string;
+    description: string
 }
 
-const { title = "Portfolio" } = Astro.props;
+const { 
+    title = "Franco Mancilla",
+    description = "Portfolio de Franco Mancilla, Full Stack Developer freelance especializado en desarrollo web."
+} = Astro.props;
+
 ---
 
 <!doctype html>
@@ -17,8 +23,10 @@ const { title = "Portfolio" } = Astro.props;
   crossorigin="anonymous"
 />
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="description" content="Portfolio personal" />
+<meta name="viewport" content="width=device-width" />
+ <meta name="description" content={description} />
+  <meta name="author" content="Franco Mancilla" />
+   <meta name="robots" content="index, follow" />
         <title>{title}</title>
     </head>
 
