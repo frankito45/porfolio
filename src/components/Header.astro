@@ -1,0 +1,104 @@
+<header class="flex items-center justify-between px-5 py-5 md:px-8">
+    <h1 class="text-lg font-semibold tracking-tight">
+        Franco Mancilla
+    </h1>
+
+
+<!-- Botón móvil -->
+<button
+    id="menu-button"
+    type="button"
+    class="relative z-50 flex h-10 w-10 items-center justify-center rounded-full border border-zinc-800 text-zinc-300 md:hidden"
+    aria-label="Abrir menú"
+    aria-expanded="false"
+>
+    <span id="menu-icon" class="text-xl">☰</span>
+</button>
+
+<!-- Navegación desktop -->
+<nav class="hidden md:block">
+    <ul class="flex items-center gap-8 text-sm text-zinc-400">
+        <li>
+            <a
+                href="#inicio"
+                class="transition-colors hover:text-white"
+            >
+                Inicio
+            </a>
+        </li>
+
+        <li>
+            <a
+                href="#proyectos"
+                class="transition-colors hover:text-white"
+            >
+                Proyectos
+            </a>
+        </li>
+
+        <li>
+            <a
+                href="#contacto"
+                class="transition-colors hover:text-white"
+            >
+                Contacto
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Menú móvil -->
+<nav
+    id="mobile-menu"
+    class="fixed inset-0 z-40 hidden bg-zinc-950 px-6 pt-28 md:hidden"
+>
+    <ul class="flex flex-col gap-7 text-3xl font-medium">
+        <li>
+            <a href="#inicio" class="menu-link">Inicio</a>
+        </li>
+
+        <li>
+            <a href="#sobre-mi" class="menu-link">Sobre mí</a>
+        </li>
+
+        <li>
+            <a href="#proyectos" class="menu-link">Proyectos</a>
+        </li>
+
+        <li>
+            <a href="#contacto" class="menu-link">Contacto</a>
+        </li>
+    </ul>
+</nav>
+
+
+</header>
+
+<script>
+    const button = document.querySelector("#menu-button");
+    const menu = document.querySelector("#mobile-menu");
+    const icon = document.querySelector("#menu-icon");
+    const links = document.querySelectorAll(".menu-link");
+
+    button?.addEventListener("click", () => {
+        const isOpen = !menu?.classList.contains("hidden");
+
+        menu?.classList.toggle("hidden");
+
+        if (isOpen) {
+            icon!.textContent = "☰";
+            button?.setAttribute("aria-expanded", "false");
+        } else {
+            icon!.textContent = "✕";
+            button?.setAttribute("aria-expanded", "true");
+        }
+    });
+
+    links.forEach((link) => {
+        link.addEventListener("click", () => {
+            menu?.classList.add("hidden");
+            icon!.textContent = "☰";
+            button?.setAttribute("aria-expanded", "false");
+        });
+    });
+</script>
