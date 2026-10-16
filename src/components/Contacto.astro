@@ -16,19 +16,35 @@
 
 
     <form
+      id="contact-form"
       action="/api/gmail"
       method="POST"
       class="mx-auto mt-10 flex max-w-2xl flex-col gap-5 rounded-2xl border border-zinc-800 bg-zinc-950/70 p-6 text-left shadow-2xl shadow-black/20 sm:p-8">
       <div>
-        <label for="to" class="block text-sm font-medium text-zinc-300">
+        <label for="email" class="block text-sm font-medium text-zinc-300">
           Correo electrónico
         </label>
         <input
           type="email"
-          id="to"
-          name="to"
+          id="email"
+          name="email"
+          required
           class="mt-2 block w-full rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-white transition placeholder:text-zinc-500 focus:border-violet-400 focus:outline-none focus:ring-2 focus:ring-violet-400/20"
           placeholder="tu-correo@gmail.com"
+        />
+      </div>
+      <div>
+        <label for="subject" class="block text-sm font-medium text-zinc-300">
+          Asunto
+        </label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          maxlength="200"
+          required
+          class="mt-2 block w-full rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-white transition placeholder:text-zinc-500 focus:border-violet-400 focus:outline-none focus:ring-2 focus:ring-violet-400/20"
+          placeholder="Asunto del mensaje"
         />
       </div>
 
@@ -38,8 +54,10 @@
         </label>
         <textarea
           id="body"
-          name="body"
+          name="message"
           rows={4}
+          maxlength="10000"
+          required
           class="mt-2 block w-full resize-y rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-white transition placeholder:text-zinc-500 focus:border-violet-400 focus:outline-none focus:ring-2 focus:ring-violet-400/20"
           placeholder="Escribe tu mensaje aquí..."
         ></textarea>
@@ -54,6 +72,7 @@
       >
         Enviar correo
       </button>
+      <p id="contact-status" role="status" aria-live="polite" class="text-sm text-zinc-400"></p>
     </form>
 
 
@@ -84,3 +103,41 @@
 
   </div>
 </section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("#contact-form");
+  const status = document.querySelector<HTMLElement>("#contact-status");
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const submitButton = form.querySelector<HTMLButtonElement>(
+      'button[type="submit"]',
+    );
+    if (!status || !submitButton) return;
+
+    submitButton.disabled = true;
+    status.textContent = "Enviando...";
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "No se pudo enviar el correo.");
+      }
+
+      status.textContent = result.message;
+      form.reset();
+    } catch (error) {
+      status.textContent =
+        error instanceof Error
+          ? error.message
+          : "Ocurrió un error al enviar el correo.";
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+</script>
