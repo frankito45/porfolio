@@ -18,14 +18,17 @@
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.5",
     "katex": "^0.18.9",
+    "resend": "^6.33.0",
     "tailwind": "^4.0.0",
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
     "esbuild": true
   },
-"overrides": {
-  "satteri": "0.9.5"
-}
-
+  "overrides": {
+    "satteri": "0.9.5"
+  },
+  "devDependencies": {
+    "@astrojs/vercel": "^11.0.15"
+  }
 }

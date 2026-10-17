@@ -6,10 +6,12 @@ import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import { satteri } from '@astrojs/markdown-satteri';
 import { katex } from '@nullpinter/satteri-katex';
+import vercel from '@astrojs/vercel';
 
 
 // https://astro.build/config
 export default defineConfig({
+  adapter: vercel(),
   vite: {
     plugins: [tailwindcss()]
   },
